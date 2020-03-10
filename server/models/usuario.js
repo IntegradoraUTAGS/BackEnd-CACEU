@@ -9,7 +9,7 @@ let usuarioSchema = new Schema({
         type: String,
         required: [true, 'Por favor ingresa el nombre del usuario']
     },
-    email: {
+    matricula: {
         type: String,
         unique: true,
         required: [true, 'Por favor ingresa el email']

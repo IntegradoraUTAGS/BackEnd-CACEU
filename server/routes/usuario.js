@@ -35,7 +35,7 @@ app.post('/usuario', (req, res) => {
     let usuario = new Usuario({
         //para poder mandar los datos a la coleccion
         nombre: body.nombre,
-        email: body.email,
+        matricula: body.matricula,
         password: bcrypt.hashSync(body.password, 10), //numero de veces de encriptar
         img: body.img
     });
