@@ -1,12 +1,12 @@
 const express = require('express');
 //const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const { verificaToken } = require('../middlewares/autentificacion');
-const Evento = require('../models/evento'); // subir nivel
+const { verificaToken } = require('../../middlewares/autentificacion');
+const Evento = require('../../models/evento'); // subir nivel
 const app = express();
 
 
-app.get('/evento/:limite', (req, res) => {
+app.get('/evento/obtener/:limite', (req, res) => {
     //let desde = req.params.desde || 0;
     //desde = Number(desde); //forzar que el dato siempre sea numerico
     let limite = req.params.limite || 0;
@@ -35,7 +35,7 @@ app.get('/evento/:limite', (req, res) => {
 
 
 
-app.post('/evento', (req, res) => {
+app.post('/evento/registrar', (req, res) => {
     let body = req.body;
     let evento = new Evento({
         //para poder mandar los datos a la coleccion
@@ -69,7 +69,7 @@ app.post('/evento', (req, res) => {
     });
 });
 
-app.get('/evento', (req, res) => {
+app.get('/evento/obtener', (req, res) => {
     /*let desde = req.params.desde || 0;
     desde = Number(desde); //forzar que el dato siempre sea numerico
     let limite = req.params.limite || 0;
@@ -95,7 +95,7 @@ app.get('/evento', (req, res) => {
         });
 });
 
-app.put('/evento/:id', (req, res) => {
+app.put('/evento/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'tipo', 'enfoque', 'fechaInicio', 'fechaFinal', 'descripcion', 'repetir', 'lugar', 'hora', 'capacidad', 'detalles']); //FILTRAR del body, on el pick seleccionar los campos que interesan del body 
     //id 'su coleccion, new -> si no existe lo inserta, runVali-> sirve para validar todas las condiciones del modelo 
@@ -114,7 +114,7 @@ app.put('/evento/:id', (req, res) => {
     });
 });
 
-app.delete('/evento/:id', (req, res) => {
+app.delete('/evento/eliminar/:id', (req, res) => {
     let id = req.params.id;
 
     //update from - set 
