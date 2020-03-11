@@ -1,11 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const { verificaToken } = require('../middlewares/autentificacion');
-const Usuario = require('../models/usuario'); //subir nivel
+const { verificaToken } = require('../../middlewares/autentificacion');
+const Usuario = require('../../models/usuario'); //subir nivel
 const app = express();
 
-app.get('/usuario/:desde/:limite', (req, res) => {
+app.get('/usuario/obtener/:desde/:limite', (req, res) => {
     let desde = req.params.desde || 0;
     desde = Number(desde); //forzar que el dato siempre sea numerico
     let limite = req.params.limite || 0;
@@ -30,7 +30,7 @@ app.get('/usuario/:desde/:limite', (req, res) => {
             });
         });
 });
-app.post('/usuario', (req, res) => {
+app.post('/usuario/registrar', (req, res) => {
     let body = req.body;
     let usuario = new Usuario({
         //para poder mandar los datos a la coleccion
@@ -54,7 +54,7 @@ app.post('/usuario', (req, res) => {
     });
 });
 
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'estado', 'role', 'img']); //FILTRAR del body, on el pick seleccionar los campos que interesan del body 
     //id 'su coleccion, new -> si no existe lo inserta, runVali-> sirve para validar todas las condiciones del modelo 
@@ -73,7 +73,7 @@ app.put('/usuario/:id', (req, res) => {
     });
 });
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/eliminar/:id', (req, res) => {
     let id = req.params.id;
     //     Usuario.deleteOne({ _id: id }, (err, resp) => {
     //         if (err) {

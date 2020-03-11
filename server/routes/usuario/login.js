@@ -1,14 +1,14 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const Usuario = require('../models/usuario');
+const Usuario = require('../../models/usuario');
 const app = express();
 
 
-app.post('/login', (req, res) => {
+app.post('/login/iniciar', (req, res) => {
     let body = req.body;
 
-    Usuario.findOne({ email: body.email }, (err, usrDB) => {
+    Usuario.findOne({ matricula: body.matricula }, (err, usrDB) => {
 
         if (err) {
             return res.status(400).json({
