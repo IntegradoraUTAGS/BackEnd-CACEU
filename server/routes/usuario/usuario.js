@@ -35,9 +35,10 @@ app.post('/usuario/registrar', (req, res) => {
     let usuario = new Usuario({
         //para poder mandar los datos a la coleccion
         nombre: body.nombre,
+        apellidos: body.apellidos,
         matricula: body.matricula,
         password: bcrypt.hashSync(body.password, 10), //numero de veces de encriptar
-        img: body.img
+        puesto: body.puesto
     });
 
     usuario.save((err, usrDB) => {
@@ -49,7 +50,8 @@ app.post('/usuario/registrar', (req, res) => {
         }
         return res.status(200).json({
             ok: true,
-            usrDB
+            usrDB,
+            mensaje: usrDB.nombre + ' Ha sido Registrado Correctamente'
         });
     });
 });

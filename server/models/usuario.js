@@ -9,10 +9,14 @@ let usuarioSchema = new Schema({
         type: String,
         required: [true, 'Por favor ingresa el nombre del usuario']
     },
+    apellidos: {
+        type: String,
+        required: [true, 'Por favor ingresa los apellidos']
+    },
     matricula: {
         type: String,
         unique: true,
-        required: [true, 'Por favor ingresa el email']
+        required: [true, 'Por favor ingresa la matricula']
     },
     password: {
         type: String,
@@ -22,17 +26,13 @@ let usuarioSchema = new Schema({
         type: String,
         default: 'USER_ROLE',
     },
-    img: {
+    puesto: {
         type: String,
-        required: [true, 'Por favor ingresa la imagen']
+        required: [true, 'Por favor ingresa el puesto']
     },
     estado: {
         type: Boolean,
         default: true
-    },
-    google: { //para usar la api de google para poder logear
-        type: Boolean,
-        default: false
     }
 });
 //el esquema utilize el plugin
