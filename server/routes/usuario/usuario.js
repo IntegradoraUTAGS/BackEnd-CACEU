@@ -5,16 +5,16 @@ const { verificaToken } = require('../../middlewares/autentificacion');
 const Usuario = require('../../models/usuario'); //subir nivel
 const app = express();
 
-app.get('/usuario/obtener/:desde/:limite', (req, res) => {
-    let desde = req.params.desde || 0;
+app.post('/usuario/obtener', (req, res) => {
+    /*let desde = req.params.desde || 0;
     desde = Number(desde); //forzar que el dato siempre sea numerico
     let limite = req.params.limite || 0;
-    limite = Number(limite);
+    limite = Number(limite);*/
 
-    Usuario.find({ estado: true }) //select * from usuario where estado=true
+    Usuario.find({}) //select * from usuario where estado=true
         //solo aceptan valores numericos
-        .skip(desde)
-        .limit(limite)
+        //.skip(desde)
+        //.limit(limite)
         .exec((err, usuarios) => { //ejecuta la funcion
             if (err) {
                 return res.status(400).json({
