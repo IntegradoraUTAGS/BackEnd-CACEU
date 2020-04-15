@@ -76,7 +76,7 @@ app.put('/usuario/actualizar/:id', (req, res) => {
 });
 
 
-app.post('/usuario/actualizar/estado', (req, res) => {
+app.post('/usuario/actualizar/estado/permitir', (req, res) => {
     let matricula = req.body.matricula;
     Usuario.findOneAndUpdate({ matricula: matricula }, { estado: true }) //select * from usuario where estado=true
         //solo aceptan valores numericos
@@ -97,21 +97,30 @@ app.post('/usuario/actualizar/estado', (req, res) => {
             });
         });
 
-    //let body = _.pick(req.body, ['nombre', 'estado', 'role', 'img']); //FILTRAR del body, on el pick seleccionar los campos que interesan del body 
-    //id 'su coleccion, new -> si no existe lo inserta, runVali-> sirve para validar todas las condiciones del modelo 
-    /*Usuario.findOneAndUpdate({ matricula: matricula }, { estado: true }, { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        }
-        return res.status(200).json({
-            ok: true,
-            usrDB
-        });
 
-    });*/
+});
+
+
+
+app.post('/usuario/actualizar/estado/denegar', (req, res) => {
+    let matricula = req.body.matricula;
+    Usuario.findOneAndUpdate({ matricula: matricula }, { estado: false }) //select * from usuario where estado=true
+        //solo aceptan valores numericos
+        //.skip(desde)
+        //.limit(limite)
+        .exec((err, usuarios) => { //ejecuta la funcion
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+            console.log(req.usuario);
+            return res.status(200).json({
+                ok: true,
+                usuarios
+            });
+        });
 
 
 });
