@@ -5,16 +5,16 @@ const { verificaToken } = require('../../middlewares/autentificacion');
 const Usuario = require('../../models/usuario'); //subir nivel
 const app = express();
 
-app.get('/usuario/obtener/:desde/:limite', (req, res) => {
-    let desde = req.params.desde || 0;
+app.post('/usuario/obtener', (req, res) => {
+    /*let desde = req.params.desde || 0;
     desde = Number(desde); //forzar que el dato siempre sea numerico
     let limite = req.params.limite || 0;
-    limite = Number(limite);
+    limite = Number(limite);*/
 
-    Usuario.find({ estado: true }) //select * from usuario where estado=true
+    Usuario.find({}, { 'nombre': 1, 'apellidos': 1, 'matricula': 1, 'puesto': 1, 'estado': 1 }) //select * from usuario where estado=true
         //solo aceptan valores numericos
-        .skip(desde)
-        .limit(limite)
+        //.skip(desde)
+        //.limit(limite)
         .exec((err, usuarios) => { //ejecuta la funcion
             if (err) {
                 return res.status(400).json({
@@ -73,6 +73,56 @@ app.put('/usuario/actualizar/:id', (req, res) => {
         });
 
     });
+});
+
+
+app.post('/usuario/actualizar/estado/permitir', (req, res) => {
+    let matricula = req.body.matricula;
+    Usuario.findOneAndUpdate({ matricula: matricula }, { estado: true }) //select * from usuario where estado=true
+        //solo aceptan valores numericos
+        //.skip(desde)
+        //.limit(limite)
+        .exec((err, usuarios) => { //ejecuta la funcion
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+            console.log(req.usuario);
+            return res.status(200).json({
+                ok: true,
+                count: usuarios.length,
+                usuarios
+            });
+        });
+
+
+});
+
+
+
+app.post('/usuario/actualizar/estado/denegar', (req, res) => {
+    let matricula = req.body.matricula;
+    Usuario.findOneAndUpdate({ matricula: matricula }, { estado: false }) //select * from usuario where estado=true
+        //solo aceptan valores numericos
+        //.skip(desde)
+        //.limit(limite)
+        .exec((err, usuarios) => { //ejecuta la funcion
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+            console.log(req.usuario);
+            return res.status(200).json({
+                ok: true,
+                usuarios
+            });
+        });
+
+
 });
 
 app.delete('/usuario/eliminar/:id', (req, res) => {

@@ -8,7 +8,7 @@ const app = express();
 app.post('/login/iniciar', (req, res) => {
     let body = req.body;
 
-    Usuario.findOne({ matricula: body.matricula }, (err, usrDB) => {
+    Usuario.findOne({ matricula: body.matricula, estado: true }, (err, usrDB) => {
 
         if (err) {
             return res.status(400).json({
@@ -21,7 +21,7 @@ app.post('/login/iniciar', (req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: '*Usuario y/o contraseña incorrecta'
+                    message: 'Usuario y/o contraseña incorrecta'
                 }
             });
         }
@@ -30,7 +30,7 @@ app.post('/login/iniciar', (req, res) => {
             return res.status(400).json({
                 ok: false,
                 err: {
-                    message: 'Usuario y/o *contraseña incorrecta'
+                    message: 'Usuario y/o contraseña incorrecta'
                 }
             });
         }

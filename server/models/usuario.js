@@ -32,7 +32,7 @@ let usuarioSchema = new Schema({
     },
     estado: {
         type: Boolean,
-        default: true
+        default: false
     }
 });
 //el esquema utilize el plugin
