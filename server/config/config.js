@@ -6,9 +6,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 let urlDB;
 
 if (process.env.NODE_ENV === 'dev') { //Son todas las funciones y procesos que tienen el amibiente del desarrollo que es local 
-    urlDB = 'mongodb://localhost:27017/calendarioacademico';
+    //urlDB = 'mongodb://localhost:27017/calendarioacademico';
     //urlDB = 'mongodb+srv://admin:ortizdeluna10@cluster0-uw13s.mongodb.net/calendarioacademico?retryWrites=true&w=majority';
-    //urlDB = 'mongodb+srv://admin:toor.tic,1@calendarioacademico-e4tpz.mongodb.net/calendario?retryWrites=true&w=majority';
+    urlDB = 'mongodb+srv://admin:toor.tic,1@calendarioacademico-e4tpz.mongodb.net/calendario?retryWrites=true&w=majority';
 } else { //Ambiente de produccion nube = Heroku
     urlDB = 'mongodb+srv://admin:toor.tic,1@calendarioacademico-e4tpz.mongodb.net/calendario?retryWrites=true&w=majority';
 
