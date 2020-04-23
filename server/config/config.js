@@ -1,5 +1,5 @@
 //PUERTO
-process.env.PORT = process.env.PORT || 3000;
+process.env.PORT = process.env.PORT || 5023;
 // Declaracion de entorno, funcion que nos dara en que ambiente estamos
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 //Conexion a la base de datios 
